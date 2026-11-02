@@ -50,37 +50,6 @@ Mi-Portfolio/
 └── README.md        # Documentación del proyecto
 ```
 
-## 🚀 Ejecutar localmente
-
-1. Cloná el repositorio:
-
-   ```bash
-   git clone https://github.com/loloresnik/Mi-Portfolio.git
-   ```
-
-2. Ingresá a la carpeta:
-
-   ```bash
-   cd Mi-Portfolio
-   ```
-
-3. Abrí el archivo `index.html` en tu navegador. También podés utilizar la extensión Live Server de Visual Studio Code para visualizar los cambios durante el desarrollo.
-
-## 📌 Próximas mejoras
-
-- Seguir incorporando proyectos y actualizando sus descripciones.
-- Mejorar continuamente la experiencia de navegación y la presentación en distintos dispositivos.
-- Mantener actualizados los contenidos, tecnologías y enlaces profesionales.
-
-## 👨‍💻 Autor
-
-**Lorenzo Resnik**  
-Estudiante de Ingeniería Informática en UADE.
-
-- [LinkedIn](https://www.linkedin.com/in/lorenzo-resnik-230898432)
-- [GitHub](https://github.com/loloresnik)
-- [Portfolio web](https://loloresnik.github.io/Mi-Portfolio/)
-
 ---
 
 Desarrollado con HTML5, CSS3 y JavaScript.
