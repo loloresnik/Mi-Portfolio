@@ -1,42 +1,67 @@
-const languageButton = document.getElementById('language-toggle');
-const menuButton = document.getElementById('menu-toggle');
-const nav = document.getElementById('nav');
+const botonIdioma = document.getElementById('language-toggle');
+const botonMenu = document.getElementById('menu-toggle');
+const navegacion = document.getElementById('nav');
 
-function setLanguage(language) {
-  document.documentElement.lang = language;
-  document.querySelectorAll('[data-es][data-en]').forEach((element) => {
-    const translation = element.dataset[language];
-    if (translation !== undefined) element.innerHTML = translation;
+function cambiarIdioma(idioma) {
+  document.documentElement.lang = idioma;
+
+  document.querySelectorAll('[data-es][data-en]').forEach((elemento) => {
+    const traduccion = elemento.dataset[idioma];
+
+    if (traduccion !== undefined) {
+      elemento.innerHTML = traduccion;
+    }
   });
-  languageButton.textContent = language === 'es' ? 'EN' : 'ES';
-  languageButton.setAttribute('aria-label', language === 'es' ? 'Switch to English' : 'Cambiar a español');
-  menuButton.setAttribute('aria-label', language === 'es' ? 'Abrir menú' : 'Open menu');
-  try { localStorage.setItem('portfolio-language', language); } catch (_) {}
+
+  botonIdioma.textContent = idioma === 'es' ? 'EN' : 'ES';
+  botonIdioma.setAttribute(
+    'aria-label',
+    idioma === 'es' ? 'Switch to English' : 'Cambiar a español'
+  );
+
+  botonMenu.setAttribute(
+    'aria-label',
+    idioma === 'es' ? 'Abrir menú' : 'Open menu'
+  );
+
+  try {
+    localStorage.setItem('portfolio-language', idioma);
+  } catch (error) {
+    // El sitio sigue funcionando aunque el navegador no permita guardar la preferencia.
+  }
 }
 
-let currentLanguage = 'es';
+let idiomaActual = 'es';
+
 try {
-  const saved = localStorage.getItem('portfolio-language');
-  if (saved === 'es' || saved === 'en') currentLanguage = saved;
-} catch (_) {}
-setLanguage(currentLanguage);
+  const idiomaGuardado = localStorage.getItem('portfolio-language');
 
-languageButton.addEventListener('click', () => {
-  currentLanguage = currentLanguage === 'es' ? 'en' : 'es';
-  setLanguage(currentLanguage);
+  if (idiomaGuardado === 'es' || idiomaGuardado === 'en') {
+    idiomaActual = idiomaGuardado;
+  }
+} catch (error) {
+  // Si no se puede acceder al almacenamiento, se utiliza español.
+}
+
+cambiarIdioma(idiomaActual);
+
+botonIdioma.addEventListener('click', () => {
+  idiomaActual = idiomaActual === 'es' ? 'en' : 'es';
+  cambiarIdioma(idiomaActual);
 });
 
-menuButton.addEventListener('click', () => {
-  const opened = nav.classList.toggle('open');
-  menuButton.setAttribute('aria-expanded', String(opened));
-  menuButton.textContent = opened ? '×' : '☰';
+botonMenu.addEventListener('click', () => {
+  const menuAbierto = navegacion.classList.toggle('open');
+
+  botonMenu.setAttribute('aria-expanded', String(menuAbierto));
+  botonMenu.textContent = menuAbierto ? '×' : '☰';
 });
 
-nav.querySelectorAll('a').forEach((link) => {
-  link.addEventListener('click', () => {
-    nav.classList.remove('open');
-    menuButton.setAttribute('aria-expanded', 'false');
-    menuButton.textContent = '☰';
+navegacion.querySelectorAll('a').forEach((enlace) => {
+  enlace.addEventListener('click', () => {
+    navegacion.classList.remove('open');
+    botonMenu.setAttribute('aria-expanded', 'false');
+    botonMenu.textContent = '☰';
   });
 });
 
