@@ -1,12 +1,12 @@
 const languageButton = document.getElementById('language-toggle');
 const menuButton = document.getElementById('menu-toggle');
-const nav = document.querySelector('.desktop-nav');
+const nav = document.getElementById('nav');
 
 function setLanguage(language) {
   document.documentElement.lang = language;
   document.querySelectorAll('[data-es][data-en]').forEach((element) => {
-    const value = element.dataset[language];
-    if (value !== undefined) element.innerHTML = value;
+    const translation = element.dataset[language];
+    if (translation !== undefined) element.innerHTML = translation;
   });
   languageButton.textContent = language === 'es' ? 'EN' : 'ES';
   languageButton.setAttribute('aria-label', language === 'es' ? 'Switch to English' : 'Cambiar a español');
@@ -16,8 +16,8 @@ function setLanguage(language) {
 
 let currentLanguage = 'es';
 try {
-  const savedLanguage = localStorage.getItem('portfolio-language');
-  if (savedLanguage === 'en' || savedLanguage === 'es') currentLanguage = savedLanguage;
+  const saved = localStorage.getItem('portfolio-language');
+  if (saved === 'es' || saved === 'en') currentLanguage = saved;
 } catch (_) {}
 setLanguage(currentLanguage);
 
@@ -27,9 +27,9 @@ languageButton.addEventListener('click', () => {
 });
 
 menuButton.addEventListener('click', () => {
-  const isOpen = nav.classList.toggle('open');
-  menuButton.setAttribute('aria-expanded', String(isOpen));
-  menuButton.textContent = isOpen ? '×' : '☰';
+  const opened = nav.classList.toggle('open');
+  menuButton.setAttribute('aria-expanded', String(opened));
+  menuButton.textContent = opened ? '×' : '☰';
 });
 
 nav.querySelectorAll('a').forEach((link) => {
